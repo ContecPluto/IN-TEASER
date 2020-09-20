@@ -79,7 +79,6 @@
         } 
       },
       answer(idx, accept) {
-        // opponent_email, acceptYN
         var data = {
           user_seq: cookie.cookieSeq(),
           user_nickname: cookie.cookieNickname(),

@@ -79,11 +79,6 @@
 
             </router-link>
           </div>
-          <!-- <div class="show-more">
-            <router-link :to="{name:'Detail', params:{feedSeq:feed.feed_seq}}">
-              더 보기
-            </router-link>
-          </div> -->
           <div class="feed-header">
             <router-link :to="{name:'Profile', params:{userSeq:feed.user_seq}}">
               <img v-if="feed.user_profile_route" :src="'https://i02b204.p.ssafy.io' + feed.user_profile_route" alt="profile_img" width="50px" height="100%" style="max-height: 70px;">
@@ -171,7 +166,7 @@
         }
 
         var blank_pattern = /^\s+|\s+$/g;
-        if( techTag.replace( blank_pattern, '' ) == "" ){
+        if( techTag.replace( blank_pattern, '' ) == '' ){
           alert('공백만 입력되었습니다 ');
           return false;
         }
@@ -203,14 +198,14 @@
       },
       stackChecked(idx) {
         const checked = document.querySelector('.tech' + idx).style
-        if (checked.backgroundColor == "rgb(5, 70, 13)") {
-          checked.backgroundColor = ""
-          checked.color = ""
-          checked.boxShadow = ""
+        if (checked.backgroundColor == 'rgb(5, 70, 13)') {
+          checked.backgroundColor = ''
+          checked.color = ''
+          checked.boxShadow = ''
         } else {
-          checked.backgroundColor = "#05460d"
-          checked.color = "#fff"
-          checked.boxShadow = "box-shadow: -5px -5px 10px 5px rgba(119, 119, 119, .1), 5px 5px 10px 5px rgba(255, 255, 255, 1)"
+          checked.backgroundColor = '#05460d'
+          checked.color = '#fff'
+          checked.boxShadow = 'box-shadow: -5px -5px 10px 5px rgba(119, 119, 119, .1), 5px 5px 10px 5px rgba(255, 255, 255, 1)'
         }
       },  
       smartSearch() {

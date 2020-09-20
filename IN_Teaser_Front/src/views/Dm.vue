@@ -35,78 +35,78 @@
 <script>
 	import cookie from '@/cookie.js'
 	import NotiApi from '@/apis/NotiApi.js'
-    export default {
-			watch: {
-				server: {
-					handler(server) {
-						this.textarea = []
-						this.$socket.emit('startMessage', {room:server[0].server_seq, nickname:cookie.cookieNickname()}, (data => {
-							this.textarea.push(data.message)
-						}))
-					}
-				},
-			},
-			updated(){   
-				var scroll = document.getElementsByClassName('dm-ul')[0]
-				scroll.scrollTop = scroll.scrollHeight
-			},
-			props: {
-				server: {
-					type: Array,
-					required: true
-				},
 
-				opponent_nickname: {
-					type: String,
-					required: true
+	export default {
+		watch: {
+			server: {
+				handler(server) {
+					this.textarea = []
+					this.$socket.emit('startMessage', {room:server[0].server_seq, nickname:cookie.cookieNickname()}, (data => {
+						this.textarea.push(data.message)
+					}))
 				}
 			},
+		},
+		updated(){   
+			var scroll = document.getElementsByClassName('dm-ul')[0]
+			scroll.scrollTop = scroll.scrollHeight
+		},
+		props: {
+			server: {
+				type: Array,
+				required: true
+			},
 
-			created() {
-				this.user = cookie.cookieNickname()
-				this.$socket.on('message', (data) => {
-					this.textarea.push({name:data.nickname, message:data.message})
-					.then(res => {
-						this.$emit('scroll')
-					})
+			opponent_nickname: {
+				type: String,
+				required: true
+			}
+		},
+		created() {
+			this.user = cookie.cookieNickname()
+			this.$socket.on('message', (data) => {
+				this.textarea.push({name:data.nickname, message:data.message})
+				.then(res => {
+					this.$emit('scroll')
+				})
+			})
+		},
+		data() {
+			return {
+				textarea: [],
+				nickname: '',
+				room: '',
+				message: '',
+				user: '',
+				opponent_seq: '',
+				server_seq: '',
+			}
+		},
+		methods: {
+			sendMessage () {
+				var message = this.message
+				this.message = ''
+				var data = {
+					user_seq: cookie.cookieSeq(),
+					opponent_seq: this.server[0].opponent_seq,
+					server_seq: this.server[0].server_seq,
+					content: message
+				}
+				NotiApi.dmSend(data, res=>{
+					this.textarea.push({name:this.user, message:message})
+					this.$socket.emit('sendMessage',{ room:this.server[0].server_seq, nickname:this.user, message:message}, (data => {
+						}));
+					this.$emit('scroll')
+				}, err=>{
+					
 				})
 			},
-			data() {
-				return {
-					textarea: [],
-					nickname: '',
-					room: '',
-					message: '',
-					user: '',
-					opponent_seq: '',
-					server_seq: '',
-				}
-			},
-			methods: {
-				sendMessage () {
-					var message = this.message
-					this.message = ''
-					var data = {
-						user_seq: cookie.cookieSeq(),
-						opponent_seq: this.server[0].opponent_seq,
-						server_seq: this.server[0].server_seq,
-						content: message
-					}
-					NotiApi.dmSend(data, res=>{
-						this.textarea.push({name:this.user, message:message})
-						this.$socket.emit('sendMessage',{ room:this.server[0].server_seq, nickname:this.user, message:message}, (data => {
-							}));
-						this.$emit('scroll')
-					}, err=>{
-
-					})
-				},
-				dmWindowClose() {
-					NotiApi.dmExit({user_seq:cookie.cookieSeq()})
-					this.$emit('close', {opponent_seq: this.server[0].opponent_seq, opponent_nickname:this.opponent_nickname})
-				}
+			dmWindowClose() {
+				NotiApi.dmExit({user_seq:cookie.cookieSeq()})
+				this.$emit('close', {opponent_seq: this.server[0].opponent_seq, opponent_nickname:this.opponent_nickname})
 			}
-    }
+		}
+	}
 </script>
 
 <style scoped>
@@ -181,12 +181,11 @@
 	border-color: #f7f5ec;
 }
 .md-app {
-
-		height: 800px;
-		border: 1px solid rgba(#000, .12);
+	height: 800px;
+	border: 1px solid rgba(#000, .12);
 }
 .md-textarea {
-		height: 300px;
+	height: 300px;
 }
 .talk-bubble {
 	margin: 10px 5px;
@@ -194,8 +193,6 @@
   position: relative;
 	max-width: 200px;
 	min-height: 50px;
-	/* border: 2px dashed #ccc; */
-	/* background-color: #f6f5f0; */
 	z-index: 102;
 	background-color: #E7EBE0FF;
 }
@@ -236,6 +233,7 @@
 	margin-left: auto;
 	display: block;
 }
+
 /* Right triangle, right side slightly down*/
 
 .tri-right.right-in:after{
@@ -251,6 +249,7 @@
 }
 
 /* talk bubble contents */
+
 .talktext{
 	text-align: left;
 	padding: 15px 20px 10px 20px;
@@ -258,7 +257,6 @@
 }
 .talktext p{
 	max-width: 200px;
-  /* remove webkit p margins */
   -webkit-margin-before: 0em;
 	-webkit-margin-after: 0em;
 	overflow-wrap: break-word;
