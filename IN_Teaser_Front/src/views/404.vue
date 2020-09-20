@@ -10,52 +10,52 @@
 
 <script>
 
-export default {
-  methods: {
-    backgo() {
-      var router = this.$router;
-      var route = this.$route.params.route;
-      if (route == 'Join') {
-          router.push({
-              name: "Join",
-              params: {
-                  "nickName": this.$route.params.nickName,
-                  "email": this.$route.params.email,
-                  "password": this.$route.params.password,
-                  "route": this.$route.name
-              }
-          })
-      } else if (route == 'Login') {
-          router.push({
-              name: "Login",
-              params: {
-                  "email": this.$route.params.email,
-                  "route": this.$route.name
-              }
-          })
-      } else if (route == 'FindPassword') {
-          router.push({
-              name: "FindPassword",
-              params: {
-                  "email": this.$route.params.email,
-                  "route": this.$route.name
-              }
-          })
-      } else if (route === undefined) {
-          router.push({
-            name: 'Main'
-          })
-      } else {
-          router.push({
-              name: "Login",
-              params: {
-                  "route": this.$route.name
-              }
-          })
-      }
-    }              
-}
-}
+  export default {
+    methods: {
+      backgo() {
+        var router = this.$router;
+        var route = this.$route.params.route;
+        if (route == 'Join') {
+            router.push({
+                name: 'Join',
+                params: {
+                    'nickName': this.$route.params.nickName,
+                    'email': this.$route.params.email,
+                    'password': this.$route.params.password,
+                    'route': this.$route.name
+                }
+            })
+        } else if (route == 'Login') {
+            router.push({
+                name: 'Login',
+                params: {
+                    'email': this.$route.params.email,
+                    'route': this.$route.name
+                }
+            })
+        } else if (route == 'FindPassword') {
+            router.push({
+                name: 'FindPassword',
+                params: {
+                    'email': this.$route.params.email,
+                    'route': this.$route.name
+                }
+            })
+        } else if (route === undefined) {
+            router.push({
+              name: 'Main'
+            })
+        } else {
+            router.push({
+                name: 'Login',
+                params: {
+                    'route': this.$route.name
+                }
+            })
+        }
+      }              
+    }
+  }
 </script>
 <style scoped>
 .warpper404 {

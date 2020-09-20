@@ -165,7 +165,7 @@
           return false;
         }
         var blank_pattern = /^\s+|\s+$/g;
-        if( link.link.replace( blank_pattern, '' ) == "" || link.linkname.replace( blank_pattern, '' ) == "" ){
+        if( link.link.replace( blank_pattern, '' ) == '' || link.linkname.replace( blank_pattern, '' ) == '' ){
           return false;
         }
         return true
@@ -318,9 +318,9 @@
         var date = new Date();
         this.$store.commit('isLogin')
         this.$store.commit('clearInfo')
-        document.cookie = 'login_user' + "= " + "; expires=" + date.toUTCString() + "; path=/";
-        document.cookie = 'jwt-auth-token' + "= " + "; expires=" + date.toUTCString() + "; path=/";
-        document.cookie = 'login_seq' + "= " + "; expires=" + date.toUTCString() + "; path=/";
+        document.cookie = 'login_user' + '= ' + '; expires=' + date.toUTCString() + '; path=/';
+        document.cookie = 'jwt-auth-token' + '= ' + '; expires=' + date.toUTCString() + '; path=/';
+        document.cookie = 'login_seq' + '= ' + '; expires=' + date.toUTCString() + '; path=/';
         this.$router.push('/')
       },
     },
@@ -370,7 +370,6 @@ figure { display:flex; }
 
 .tgl {
 	display: none;
-  
 	// add default box-sizing for this scope
 	&,
   &:after,
@@ -572,12 +571,6 @@ h1 {
     border-color: #f7f5ec;
 }
 
-.submit p {
-  
-}
-
-
-
 figure {
   flex:1;
   flex-direction:column;
@@ -597,10 +590,8 @@ figure {
   color: #f7f5ec;
   background-color: rgb(5, 59, 11);
   border-radius: 50px;
-  
 }
-
-  .toggle:after, .toggle:before {
+.toggle:after, .toggle:before {
   flex:1;
   text-align:center;
   font-size: 30px;
@@ -635,12 +626,10 @@ label {
 }
 
 .slide input:checked + label .card { box-shadow: 4px 4px 2px #ccc;}
-
 .slide .card { transform:translate(0); }
 .slide input:checked + label .card {
   transform:translateX(100%);
 }
-
 
 .box {
   position: relative;
